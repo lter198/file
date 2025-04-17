@@ -1,30 +1,0 @@
-Tips
-
-本地 SQL Server 迁移至 Azure SQL Database 成本节约方案（含详细配置）
-1. 推荐使用 Serverless 模式（节约计算成本）
-推荐使用 Azure SQL Database 的 General Purpose 层 + Serverless 模式： - 自动按需扩展计算资源 - 在闲置时暂停计费，仅收取存储费用 - 最小/最大 vCore 可设置为 1~2 vCore，适用于测试和开发环境 参考链接：https://learn.microsoft.com/ja-jp/azure/azure-sql/database/serverless-tier-overview
-2. 利用 MSDN 每月赠送的 $150 开发测试额度
-通过 Visual Studio Enterprise 订阅提供的 Azure 开发测试额度，您可免费部署测试用数据库。 参考链接：https://azure.microsoft.com/ja-jp/pricing/dev-test/
-3. 每月数据库流量为 80-100 GB，如何控制成本
-Azure SQL Database 的出站流量（传出 Azure 数据）是按 GB 计费的： - 每月前 5GB 免费 - 5GB 以上部分，按地区不同约为 $0.087/GB（以日本地区为例） - 80-100GB 出站流量，预计额外成本为 $6.5~$8.2 建议评估是否可通过本地化访问或 ExpressRoute 等方式进一步降低出站费用。 参考：https://azure.microsoft.com/en-us/pricing/details/bandwidth/
-4. 使用免费工具进行存储过程迁移与测试
-- SQL Server Migration Assistant (SSMA)：分析和转换存储过程兼容性 - Azure Data Studio：用于数据库连接和测试脚本执行 - Azure Database Migration Service：迁移数据库结构和数据 以上工具在开发/测试场景中免费使用。
-5. 成本控制建议
-- 设置 Azure 预算与警报，避免超出 MSDN 额度 - 启用 SQL Serverless 自动暂停（例如空闲 1 小时自动停止） - 使用标签（tags）管理资源，避免遗留资源持续收费
-6. 具体套餐推荐与估算费用
-根据需求，使用 Azure SQL Database 的 Serverless 模式将最大限度节省费用，以下为每月大致费用估算： - **计算资源**：Azure SQL Database（General Purpose / Serverless） 1 vCore，约 $30~$60 - **数据库存储**：约 32~64 GB，费用约 $5~$10 - **出站流量**：80~100 GB，约 $6.5~$8.2 - **MSDN 订阅抵扣**：每月 $150 的开发测试额度 **总计：每月预计费用为 $45~$80 左右（可在 MSDN 额度内或略超）。**
-
-
-オンプレミス SQL Server から Azure SQL Database への移行案（コスト最適化）
-1. Serverless モードの活用（コンピューティングコスト削減）
-Azure SQL Database の General Purpose 層 + Serverless モードがおすすめ： - 自動でスケーリング - アイドル時には課金が停止され、ストレージのみ課金 - vCore を最小 1 ～ 最大 2 に設定可能 参考：https://learn.microsoft.com/ja-jp/azure/azure-sql/database/serverless-tier-overview
-2. MSDN サブスクリプションの $150 開発・テストクレジットを最大活用
-Visual Studio Enterprise に含まれる Azure 開発・テスト用クレジット（$150/月）を活用して、コストゼロでテスト環境を構築可能。 参考：https://azure.microsoft.com/ja-jp/pricing/dev-test/
-3. 毎月のデータ転送量が 80～100 GB の場合のコスト対策
-Azure SQL Database の送信（アウトバウンド）通信は従量課金： - 毎月 5 GB まで無料 - 以降、日本リージョンでは約 $0.087/GB - 80～100 GB では $6.5～$8.2 程度の追加費用 可能であればローカルネットワークや ExpressRoute を検討してください。 参考：https://azure.microsoft.com/en-us/pricing/details/bandwidth/
-4. ストアドプロシージャの無料移行・検証ツール
-- SSMA：ストアドプロシージャの互換性分析 - Azure Data Studio：スクリプトの接続と実行に最適 - Azure DMS：構造とデータの移行に使用 上記ツールは開発環境において無料で使用可能です。
-5. コストコントロールのポイント
-- Azure の予算とアラート設定でコスト監視 - Serverless の自動一時停止（1時間アイドル時など）を有効化 - リソースタグを使い、不要な課金の発生を防止
-6. 具体的な構成案とコスト予測
-要求に応じて、Azure SQL Database の Serverless モードを使用することでコストを最大限に削減できます。 - **計算リソース**：Azure SQL Database（General Purpose / Serverless）1 vCore、約 $30～$60 - **データベースストレージ**：約 32～64 GB、費用は $5～$10 - **送信データ転送**：80～100 GB、約 $6.5～$8.2 - **MSDN クレジット**：開発・テスト用の $150/月のクレジット **総額：月額費用は約 $45～$80 以内（MSDN クレジットでカバー可能）。**
